@@ -6,6 +6,10 @@
         <h1 class="text-3xl font-bold text-gray-900">
           SGE Champions League Kalkulator
         </h1>
+        <h1 class="text-base font-normal text-gray-900">
+          Klicke in der Spalte 'Offene Spiele' Begegbungen an, um die Änderungen
+          in der Tabelle zu sehen.
+        </h1>
       </div>
     </header>
     <main>
@@ -34,14 +38,14 @@
                         </th>
                         <th
                           scope="col"
-                          class="py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          class="py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
                           style="6%"
                         >
                           P
                         </th>
                         <th
                           scope="col"
-                          class="py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+                          class="py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           style="6%"
                         >
                           S
@@ -68,25 +72,100 @@
                           N
                         </th>
                         <th scope="col" class=""></th>
-
-                        <!--<th
-                          scope="col"
-                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Punkte
-                        </th> -->
                         <th
                           v-for="index in 7"
                           :key="index"
                           scope="col"
-                          class="w-1/12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          class="w-1/12 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                           style="white-space: nowrap"
                         >
                           {{ index === 1 ? "Offene Spiele" : "" }}
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody
+                      class="bg-white divide-y divide-gray-200"
+                      v-if="loading"
+                    >
+                      <tr v-for="index in 18" :key="index">
+                        <td></td>
+
+                        <td class="px-6 py-4 whitespace-nowrap w-2">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 rounded"
+                              style="width: 32px; height: 32px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 rounded w-3/4"
+                              style="height: 14px"
+                            ></div>
+                            <div
+                              class="bg-gray-400 rounded w-3/4 mt-1"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 w-1/3"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 w-1/3"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 w-1/3"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 w-1/3"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td class="py-4 whitespace-nowrap">
+                          <div class="items-center">
+                            <div
+                              class="bg-gray-400 w-1/3"
+                              style="height: 14px"
+                            ></div>
+                          </div>
+                        </td>
+                        <td></td>
+                        <td
+                          v-for="index in 7"
+                          :key="index"
+                          align="center"
+                          class="py-4 whitespace-nowrap w-1/12 items-center"
+                        >
+                          <div
+                            class="bg-gray-400 rounded"
+                            style="width: 32px; height: 32px"
+                          ></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else class="bg-white divide-y divide-gray-200">
                       <tr
                         v-for="(team, index) in orderedTeams()"
                         :key="team.TeamId"
@@ -98,6 +177,9 @@
                             'border-green-400 border-l-8': index <= 3,
                             'border-blue-400 border-l-8': index == 4,
                             'border-blue-200 border-l-8': index == 5,
+                            'border-blue-200 border-l-8': index == 5,
+                            'border-orange-400 border-l-8': index == 15,
+                            'border-red-600 border-l-8': index >= 16,
                           }"
                         >
                           <div class="flex items-center">
@@ -131,6 +213,12 @@
                               style="max-width: 32px; max-height: 32px"
                               :src="team.TeamIconUrl"
                             />
+                            <span
+                              v-else
+                              class="font-bold ml-1"
+                              style="font-size: 32px"
+                              >L</span
+                            >
                           </div>
                         </td>
                         <td class="py-4 whitespace-nowrap">
@@ -138,7 +226,7 @@
                             <div class="text-sm font-medium text-gray-900">
                               {{ team.TeamName }}
                             </div>
-                            <div class="text-sm text-gray-500">
+                            <div class="text-sm text-gray-500 font-semibold">
                               {{ index + 1 }}. Platz
                             </div>
                           </div>
@@ -180,140 +268,6 @@
                           </div>
                         </td>
                         <td></td>
-                        <!--<td class="px-6 py-4 whitespace-nowrap">
-                          <div class="text-sm text-gray-900 font-medium">
-                            {{ team.Points }}
-                          </div>
-                          <div class="text-sm text-gray-500">Optimization</div>
-                        </td> -->
-                        <!--<td class="px-6 py-4 whitespace-nowrap"> -->
-                        <!-- <div class="max-w-xs rounded-full overflow-hidden shadow-lg relative h-10 w-10">
-  <img class="h-10 w-10 object-cover" style="
-                                -webkit-filter: grayscale(100%);
-                                filter: grayscale(100%);
-                              " src="https://upload.wikimedia.org/wikipedia/commons/6/6d/FC_Schalke_04_Logo.svg" alt="Flower and sky"/>
-  <div class="absolute top-0 left-1/2" style="transform: translateX(-50%);">
-    <h4 class="hover:text-white-700 font-semibold text-red-900 tracking-tight text-3xl">S</h4>
-  </div>
-</div> -->
-
-                        <!--<div class="flex flex-no-wrap items-center">
-                            <div
-                              v-for="match in getRemainingMatches(team)"
-                              :key="match.MatchID"
-                              class="flex-none p-2"
-                            >
-                              <div
-                                class="flex-shrink-0 max-h-9 w-9"
-                              >
-
-<div class="flex bg-gray-200">
-  <div class="flex-initial text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
-    <img v-if="match.Team1.TeamId !== team.TeamId"
-                                  :src="match.Team1.TeamIconUrl"
-                                  class="object-cover"
-                                  alt=""
-                                />
-                                
-                                <img v-else-if="match.Team2.TeamId !== team.TeamId"
-                                  :src="match.Team2.TeamIconUrl"
-                                  alt=""
-                                />
-  </div>
-  <div class="flex-initial text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
-    Medium length
-  </div>
-</div>
-
-                              </div>
-                            </div>
-                          </div> -->
-
-                        <!--<div class="flex flex-no-wrap items-center">
-                            <div
-                              v-for="match in getRemainingMatches(team)"
-                              :key="match.MatchID"
-                              class="w-28 flex-none"
-                            >
-                              <div class="grid grid-cols-8 px-1 h-full">
-                                <div class="col-span-2 items-center">
-                                  <div
-                                    class="flex-shrink-0 max-h-9 w-9 items-center"
-                                  >
-                                    <img
-                                      v-if="match.Team1.TeamId !== team.TeamId"
-                                      style="max-width: 24px; max-height: 24px"
-                                      :src="match.Team1.TeamIconUrl"
-                                      alt=""
-                                    />
-
-                                    <img
-                                      v-else-if="
-                                        match.Team2.TeamId !== team.TeamId
-                                      "
-                                      style="max-width: 24px; max-height: 24px"
-                                      :src="match.Team2.TeamIconUrl"
-                                      alt=""
-                                    />
-                                  </div>
-                                </div>
-                                <div class="col-span-6" v-for="matchResult in [getRemainingMatchResult(match.MatchID, team)]" :key="matchResult.MatchID">
-                                  <span v-if="matchResult.result === -1" title="Noch keine Auswahl"
-                                    class="text-sm text-gray-600 font-semibold ml-2 cursor-pointer"
-                                    >---</span
-                                  >
-                                  <span v-else-if="matchResult.result === 0" title="Unentschieden"
-                                    class="text-sm text-gray-600 font-semibold ml-2 cursor-pointer"
-                                    >U</span
-                                  >
-                                  <span v-else-if="matchResult.result === 1" :title="'Sieg für '+team.TeamName"
-                                    class="text-sm text-green-600 font-semibold ml-2 cursor-pointer"
-                                    >S</span
-                                  >
-                                  <span v-else-if="matchResult.result === 2" :title="'Niederlage für '+team.TeamName"
-                                    class="text-sm text-red-600 font-semibold ml-2 cursor-pointer"
-                                    >N</span
-                                  >
-                                </div>
-                              </div>
-                            </div>
-                          </div> -->
-
-                        <!--
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex flex-no-wrap items-center">
-                            <div
-                              v-for="match in getRemainingMatches(team)"
-                              :key="match.MatchID"
-                              class="flex-none p-2 bg-red-600"
-                            >
-                              <div
-                                class="flex-shrink-0 max-h-9 w-9 cursor-pointer boxTransitionClickable boxTransition"
-                              >
-                                <img v-if="match.Team1.TeamId !== team.TeamId"
-                                  style="
-                                    -webkit-filter: grayscale(100%);
-                                    filter: grayscale(100%) opacity(40%);
-                                    max-width: 32px; max-height: 32px
-                                  "
-                                  :src="match.Team1.TeamIconUrl"
-                                  class="object-cover"
-                                  alt=""
-                                />
-                                
-                                <img v-else-if="match.Team2.TeamId !== team.TeamId"
-                                  style="
-                                    -webkit-filter: grayscale(100%);
-                                    filter: grayscale(100%) opacity(40%);
-                                    max-width: 32px; max-height: 32px
-                                  "
-                                  :src="match.Team2.TeamIconUrl"
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                           </td> -->
 
                         <td
                           align="center"
@@ -339,8 +293,29 @@
                               )
                             "
                           >
-                            <img
+                            <span
                               v-if="
+                                remainingMatch.match.Team1.TeamId !==
+                                  team.TeamId &&
+                                remainingMatch.match.Team1.TeamId === 1635
+                              "
+                              class="boxTransition cursor-pointer font-bold"
+                              style="font-size: 32px"
+                              >L</span
+                            >
+                            <span
+                              v-else-if="
+                                remainingMatch.match.Team2.TeamId !==
+                                  team.TeamId &&
+                                remainingMatch.match.Team2.TeamId === 1635
+                              "
+                              class="boxTransition cursor-pointer font-bold"
+                              style="font-size: 32px"
+                              >L</span
+                            >
+
+                            <img
+                              v-else-if="
                                 remainingMatch.match.Team1.TeamId !==
                                 team.TeamId
                               "
@@ -359,64 +334,6 @@
                             />
                           </div>
                         </td>
-
-                        <!--<div class="col-span-6" v-for="matchResult in [getRemainingMatchResult(match.MatchID, team)]" :key="matchResult.MatchID">
-                                  <span v-if="matchResult.result === -1" title="Noch keine Auswahl"
-                                    class="text-sm text-gray-600 font-semibold ml-2 cursor-pointer"
-                                    >---</span
-                                  >
-                                  <span v-else-if="matchResult.result === 0" title="Unentschieden"
-                                    class="text-sm text-gray-600 font-semibold ml-2 cursor-pointer"
-                                    >U</span
-                                  >
-                                  <span v-else-if="matchResult.result === 1" :title="'Sieg für '+team.TeamName"
-                                    class="text-sm text-green-600 font-semibold ml-2 cursor-pointer"
-                                    >S</span
-                                  >
-                                  <span v-else-if="matchResult.result === 2" :title="'Niederlage für '+team.TeamName"
-                                    class="text-sm text-red-600 font-semibold ml-2 cursor-pointer"
-                                    >N</span
-                                  >
-                                </div> -->
-
-                        <!--<div
-                            class="flex-shrink-0 h-10 w-10 rounded-full border-4 border-red-600"
-                          >                                <span class="text-xxs text-green-600">Sieg</span>
-
-                            <img
-                              style="
-                                -webkit-filter: grayscale(100%);
-                                filter: grayscale(100%);
-                              "
-                              src="https://upload.wikimedia.org/wikipedia/commons/6/6d/FC_Schalke_04_Logo.svg"
-                              alt=""
-                            />
-                          </div>
-                          <div
-                            class="flex-shrink-0 h-10 w-10 rounded-full border-4 border-green-600"
-                          >
-                            <img
-                              style="
-                                -webkit-filter: grayscale(100%);
-                                filter: grayscale(100%);
-                              "
-                              src="https://upload.wikimedia.org/wikipedia/commons/6/6d/FC_Schalke_04_Logo.svg"
-                              alt=""
-                            />
-                          </div>
-
-                          <div
-                            class="flex-shrink-0 h-10 w-10 rounded-full border-4 border-gray-600"
-                          >
-                            <img
-                              style="
-                                -webkit-filter: grayscale(100%);
-                                filter: grayscale(100%);
-                              "
-                              src="https://upload.wikimedia.org/wikipedia/commons/6/6d/FC_Schalke_04_Logo.svg"
-                              alt=""
-                            />
-                          </div> -->
                       </tr>
                     </tbody>
                   </table>
@@ -428,6 +345,70 @@
         <!-- /End replace -->
       </div>
     </main>
+
+    <footer
+      class="px-3 py-8 bg-white dark:bg-gray-800 text-2 text-gray-500 dark:text-gray-200 transition-colors duration-200 shadow"
+    >
+      <div class="flex flex-col">
+        <div class="md:hidden mt-7 mx-auto w-11 h-px rounded-full"></div>
+        <div class="mt-4 md:mt-0 flex flex-col md:flex-row">
+          <nav
+            class="flex-1 flex flex-col items-center justify-center md:items-end md:border-r border-gray-100 md:pr-5"
+          >
+            <span class="">Daten von </span>
+            <span class="mt-7 md:mt-1">
+              <a
+                class="underline hover:text-primary-gray-20"
+                href="https://www.openligadb.de/"
+                target="_blank"
+              >
+                OpenLigaDB
+              </a>
+            </span>
+          </nav>
+          <div class="md:hidden mt-4 mx-auto w-11 h-px rounded-full"></div>
+          <div
+            class="mt-4 md:mt-0 flex-1 flex items-center justify-center md:border-r border-gray-100"
+          >
+            <a
+              class="hover:text-primary-gray-20"
+              href="https://twitter.com/54m11r"
+              target="_blank"
+            >
+              <span class="sr-only"> Twitter </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                fill="currentColor"
+                class="text-xl hover:text-gray-800 dark:hover:text-white transition-colors duration-200"
+                viewBox="0 0 1792 1792"
+              >
+                <path
+                  d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div class="md:hidden mt-4 mx-auto w-11 h-px rounded-full"></div>
+          <div
+            class="mt-7 md:mt-0 flex-1 flex flex-col items-center justify-center md:items-start md:pl-5"
+          >
+            <span class=""> © 2021 </span>
+            <span class="mt-7 md:mt-1">
+              Entwickelt von
+              <a
+                class="underline hover:text-primary-gray-20"
+                href="https://twitter.com/54m11r"
+                target="_blank"
+              >
+                54m1r
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -738,7 +719,9 @@ export default {
     });
     this.teams = teamsResponse.data;
 
-    this.loading = false;
+    setTimeout(() => {
+      this.loading = false;
+    }, 750);
     this.calculateTeamResults();
   },
 };
@@ -751,9 +734,8 @@ export default {
 }
 
 .boxTransition:hover {
-  -webkit-transform: translateY(-0.175rem);
-  transform: translateY(-0.175rem);
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+  -webkit-transform: translateY(-0.375rem);
+  transform: translateY(-0.375rem);
 }
 
 .boxTransition {
