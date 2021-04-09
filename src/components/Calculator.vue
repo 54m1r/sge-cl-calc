@@ -7,7 +7,7 @@
           SGE Champions League Kalkulator
         </h1>
         <h1 class="text-base font-normal text-gray-900">
-          Klicke in der Spalte 'Offene Spiele' Begegbungen an, um die Änderungen
+          Klicke in der Spalte 'Offene Spiele' Begegnungen an, um die Änderungen
           in der Tabelle zu sehen. Tore werden nicht berücksichtigt.
         </h1>
       </div>
