@@ -284,6 +284,7 @@
                           }"
                         >
                           <div
+                            v-if="!remainingMatch.match.MatchIsFinished"
                             class="flex-none p-2"
                             @click.prevent="
                               setRemainingMatchResult(
@@ -497,18 +498,19 @@ export default {
         },
       ],
       loading: true,
+      maxRemainingMatchesCount: 0,
     };
   },
   /*props: {
     msg: String,
   }, */
-  watch: {
+  /*watch: {
     matches: function () {
       console.log("WATCHER");
 
       this.calculateTeamResults();
     },
-  },
+  }, */
   methods: {
     orderedTeams: function () {
       let teams = this.teams.slice().map((team) => {
@@ -534,7 +536,7 @@ export default {
       }
     },
     setRemainingMatchResult: function (matchIndex, currentResult, team) {
-      let matches2 = this.matches;
+      //let matches2 = this.matches;
       let match = this.matches[matchIndex];
 
       let result = -1;
@@ -558,10 +560,10 @@ export default {
       }
 
       //alert(this.matches[matchIndex].CustomResult === result);
-      matches2[matchIndex].CustomResult = result;
+      this.matches[matchIndex].CustomResult = result;
       //alert(this.matches === matches2);
-      this.matches = [];
-      this.matches = matches2;
+      //this.matches = [];
+      //this.matches = matches2;
       //this.$forceUpdate();
       console.log(
         "done " +
@@ -598,24 +600,70 @@ export default {
       return { result }; // -1 nichts ausgewählt | 0 Unentschieden | 1 Sieg | Niederlage
     },
     getRemainingMatches: function (team) {
+      let teamMatches = this.matches.map((match, index) => {
+        match.index = index;
+        return match;
+      });
+
+      teamMatches = teamMatches.filter((match) => {
+        return (
+          match.Team1.TeamId === team.TeamId ||
+          match.Team2.TeamId === team.TeamId
+        );
+      });
+      //console.log(teamMatches);
+
       let remainingMatches = [];
 
-      this.matches.forEach((match, index) => {
+      teamMatches
+        .slice(
+          teamMatches.length - this.maxRemainingMatchesCount,
+          teamMatches.length
+        )
+        .forEach((match) => {
+          if (
+            match.Team1.TeamId === team.TeamId ||
+            match.Team2.TeamId === team.TeamId
+          ) {
+            //if (!match.MatchIsFinished) {
+            remainingMatches.push({
+              match,
+              customResult: this.getRemainingMatchResult(match.index, team),
+              matchIndex: match.index,
+            });
+            //}
+          }
+        });
+
+      return remainingMatches;
+    },
+    getRemainingMatchesCountForTeam: function (team) {
+      let count = 0;
+
+      this.matches.forEach((match) => {
         if (
           match.Team1.TeamId === team.TeamId ||
           match.Team2.TeamId === team.TeamId
         ) {
           if (!match.MatchIsFinished) {
-            remainingMatches.push({
-              match,
-              customResult: this.getRemainingMatchResult(index, team),
-              matchIndex: index,
-            });
+            count++;
           }
         }
       });
 
-      return remainingMatches;
+      return count;
+    },
+    getMaxRemainingMatchesCount: function () {
+      let maxCount = 0;
+
+      this.teams.forEach((team) => {
+        let count = this.getRemainingMatchesCountForTeam(team);
+        if (count > maxCount) {
+          maxCount = count;
+        }
+      });
+
+      return maxCount;
     },
     calculateTeamResults: function () {
       console.log("start calc");
@@ -719,9 +767,11 @@ export default {
     });
     this.teams = teamsResponse.data;
 
+    this.maxRemainingMatchesCount = this.getMaxRemainingMatchesCount();
+
     setTimeout(() => {
       this.loading = false;
-    }, 750);
+    }, 850);
     this.calculateTeamResults();
   },
 };
