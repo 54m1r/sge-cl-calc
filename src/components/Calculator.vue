@@ -4,11 +4,11 @@
     <header class="bg-white shadow">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold text-gray-900">
-          SGE Champions League Kalkulator
+          SGE Saison Kalkulator
         </h1>
         <h1 class="text-base font-normal text-gray-900">
           Klicke in der Spalte 'Offene Spiele' Begegnungen an, um die Änderungen
-          in der Tabelle zu sehen. Tore werden nicht berücksichtigt.
+          in der Tabelle zu sehen. Tore werden nicht berücksichtigt. Aktuell werden die ersten 7 Spiele angezeigt
         </h1>
       </div>
     </header>
@@ -272,7 +272,7 @@
                         <td
                           align="center"
                           class="py-4 whitespace-nowrap w-1/12 items-center"
-                          v-for="remainingMatch in team.remainingMatches"
+                          v-for="(remainingMatch) in team.remainingMatches"
                           :key="remainingMatch.match.MatchID"
                           :class="{
                             'bg-red-400':
@@ -314,7 +314,6 @@
                               style="font-size: 32px"
                               >L</span
                             >
-
                             <img
                               v-else-if="
                                 remainingMatch.match.Team1.TeamId !==
@@ -400,7 +399,7 @@
               Entwickelt von
               <a
                 class="underline hover:text-primary-gray-20"
-                href="https://twitter.com/54m11r"
+                href="https://github.com/54m1r"
                 target="_blank"
               >
                 54m1r
@@ -635,7 +634,7 @@ export default {
           }
         });
 
-      return remainingMatches;
+      return remainingMatches.slice(0, -27);
     },
     getRemainingMatchesCountForTeam: function (team) {
       let count = 0;
@@ -746,7 +745,7 @@ export default {
   },
   async mounted() {
     const matchesResponse = await axios.get(
-      `https://www.openligadb.de/api/getmatchdata/bl1/2020`
+      `https://www.openligadb.de/api/getmatchdata/bl1/2021`
     );
     matchesResponse.data.map((match) => {
       match.CustomResult = -1;
@@ -755,7 +754,7 @@ export default {
     this.matches = matchesResponse.data;
 
     const teamsResponse = await axios.get(
-      `https://www.openligadb.de/api/getavailableteams/bl1/2020`
+      `https://www.openligadb.de/api/getavailableteams/bl1/2021`
     );
     teamsResponse.data.map((team) => {
       team.Points = 0;
