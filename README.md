@@ -38,13 +38,8 @@
   - [Installation](#installation)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
-- [Support](#support)
-- [Project assistance](#project-assistance)
-- [Contributing](#contributing)
 - [Authors & contributors](#authors--contributors)
-- [Security](#security)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 </details>
 
@@ -103,37 +98,14 @@ See the [open issues](https://github.com/54m1r/sge-cl-calc/issues) for a list of
 - [Top Bugs](https://github.com/54m1r/sge-cl-calc/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
 - [Newest Bugs](https://github.com/54m1r/sge-cl-calc/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
-## Support
-
-> **[?]**
-> Provide additional ways to contact the project maintainer/maintainers.
-
-Reach out to the maintainer at one of the following places:
-
-- [GitHub issues](https://github.com/54m1r/sge-cl-calc/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
-- Contact options listed on [this GitHub profile](https://github.com/54m1r)
-
 ## Authors & contributors
 
 The original setup of this repository is by [54m1r](https://github.com/54m1r).
 
 For a full list of all authors and contributors, see [the contributors page](https://github.com/54m1r/sge-cl-calc/contributors).
 
-## Security
-
-sge-cl-calc follows good practices of security, but 100% security cannot be assured.
-sge-cl-calc is provided **"as is"** without any **warranty**. Use at your own risk.
-
-_For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
-
 ## License
 
 This project is licensed under the **MIT license**.
 
 See [LICENSE](LICENSE) for more information.
-
-## Acknowledgements
-
-> **[?]**
-> If your work was funded by any organization or institution, acknowledge their support here.
-> In addition, if your work relies on other software libraries, or was inspired by looking at other work, it is appropriate to acknowledge this intellectual debt too.
