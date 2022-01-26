@@ -61,9 +61,9 @@
 > **[?]**
 > Please provide your screenshots here.
 
-|                               Main Page                               |                               Login Page                               |
+|                               1                               |                               2                                |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| <img src="docs/images/screenshot.jpg" title="Home Page" width="100%"> | <img src="docs/images/screenshot.jpg" title="Login Page" width="100%"> |
+| <img src="docs/images/screenshot.jpg" title="Home Page" width="100%"> | <img src="docs/images/screenshot-2.png" title="Login Page" width="100%"> |
 
 </details>
 
