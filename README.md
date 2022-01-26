@@ -66,7 +66,7 @@
 > **[?]**
 > Please provide your screenshots here.
 
-|                               Home Page                               |                               Login Page                               |
+|                               Main Page                               |                               Login Page                               |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
 | <img src="docs/images/screenshot.jpg" title="Home Page" width="100%"> | <img src="docs/images/screenshot.jpg" title="Login Page" width="100%"> |
 
@@ -112,23 +112,6 @@ Reach out to the maintainer at one of the following places:
 
 - [GitHub issues](https://github.com/54m1r/sge-cl-calc/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
 - Contact options listed on [this GitHub profile](https://github.com/54m1r)
-
-## Project assistance
-
-If you want to say **thank you** or/and support active development of sge-cl-calc:
-
-- Add a [GitHub Star](https://github.com/54m1r/sge-cl-calc) to the project.
-- Tweet about the sge-cl-calc.
-- Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
-
-Together, we can make sge-cl-calc **better**!
-
-## Contributing
-
-First off, thanks for taking the time to contribute! Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
-
-
-Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
 
 ## Authors & contributors
 
