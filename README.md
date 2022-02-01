@@ -36,7 +36,6 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Authors & contributors](#authors--contributors)
 - [License](#license)
@@ -47,19 +46,12 @@
 
 ## About
 
-> **[?]**
-> Provide general information about your project here.
-> What problem does it (intend to) solve?
-> What is the purpose of your project?
-> Why did you undertake it?
-> You don't have to answer all the questions -- just the ones relevant to your project.
+When Eintracht Frankfurt reached the Champions League places in the final phase of the 20/21 season, I developed a small tool with which the effects of the games on the Bundesliga table can be displayed easily and clearly. 
 
 <details>
 <summary>Screenshots</summary>
 <br>
 
-> **[?]**
-> Please provide your screenshots here.
 
 |                               1                               |                               2                                |
 | :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
@@ -69,26 +61,19 @@
 
 ### Built With
 
-> **[?]**
-> Please provide the technologies that are used in the project.
+VueJS<br>
+Tailwind
 
 ## Getting Started
 
 ### Prerequisites
 
-> **[?]**
-> What are the project requirements/dependencies?
+NodeJS<br>
+NPM
 
 ### Installation
-
-> **[?]**
-> Describe how to install and get started with the project.
-
-## Usage
-
-> **[?]**
-> How does one go about using it?
-> Provide various use cases and code examples here.
+npm install<br>
+npm run serve
 
 ## Roadmap
 
