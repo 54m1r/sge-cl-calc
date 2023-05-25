@@ -61,14 +61,14 @@ When Eintracht Frankfurt reached the Champions League places in the final phase 
 
 ### Built With
 
-VueJS<br>
+Vue.js<br>
 Tailwind
 
 ## Getting Started
 
 ### Prerequisites
 
-NodeJS<br>
+Node.js<br>
 NPM
 
 ### Installation
